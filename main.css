@@ -1,0 +1,98 @@
+.product-zoom{
+  position: relative;
+}
+
+
+.product-zoom--show.product-zoom--has-zoom .product-zoom__box{
+  display: block;
+}
+
+.product-zoom--show.product-zoom--has-zoom .product-zoom__box-cursor{
+  display: block;
+}
+
+.product-zoom__box{
+  position: absolute;
+  left:100%;
+  padding: 0 0 100%;
+  width: 100%;
+  top:0;
+  background:#fff;
+  border: 1px solid #efefef;
+  z-index: 1;
+  margin:0 0 0 15px;
+  height: 0;
+  overflow: hidden;
+  display: none;
+}
+
+
+.product-zoom__box-cursor{
+  position: absolute;
+  background: #efefef;
+  top: 0;
+  left:0;
+  opacity: 0.5;
+  display: none;
+}
+
+.product-zoom__box__close{
+  display: none;
+}
+
+.product-zoom__box__cont{
+  height: 100%;
+}
+
+.product-zoom__loader{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+
+@media screen and (max-width:767px){
+  .product-zoom__box{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin: 0;
+    padding: 0;
+    height:auto;
+    width: auto;
+  }
+
+  .product-zoom__box-cursor{
+    display: none !important;
+  }
+
+  .product-zoom__box__close{
+    display: block;
+    position: absolute;
+    top:0;
+    right:0;
+    padding: 20px;
+    color: #fff;
+    background: #FF5B00;
+    border:none;
+    text-transform: uppercase;
+  }
+
+  .product-zoom.product-zoom--has-zoom::before{
+    content:"Double Tap Image To Zoom";
+    line-height: 1;
+    display: block;
+    padding: 15px;
+    background:rgba(255, 91, 0,0.4);
+    position: absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    color:#fff;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
