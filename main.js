@@ -175,7 +175,7 @@
 
                    if ($img.size() !== 1) throw "Found " + $img.size() + " images(s) in poplet item";
                    $img.attr("data-index", i);
-                   if (i === 0) return;
+                   if (i === 0) $img.addClass("product-zoom-poplet-item--active") return;
 
                    ret = self.options.getPopletImage($img.attr("src"), i, $img.attr("data-info"));
 
@@ -235,10 +235,9 @@
                var self = e.data.self;
                var currentIndex = self.currentImage;
 
-               if (self.windowVariables.width <= self.options.mobileBreakPoint) { // mobile breakpoint
+               self.zoomVariables.mainImageWidth = self.productZoom.width();
 
-
-               } else {
+               if (self.windowVariables.width > self.options.mobileBreakPoint) {
                    self.productZoom.addClass("product-zoom--show");
                    self.zoomVariables.showZoom = true;
                    self.zoomImageExists(function(ret) {
@@ -253,9 +252,8 @@
            },
            mouseLeave: function(e) {
               var self = e.data.self;
-               if (self.windowVariables.width <= self.options.mobileBreakPoint) { // mobile breakpoint
+               if (self.windowVariables.width > self.options.mobileBreakPoint) { // mobile breakpoint
 
-               } else {
                    self.zoomVariables.showZoom = false;
                    self.productZoom
                        .removeClass("product-zoom--show")
@@ -268,9 +266,7 @@
            },
            mouseMove: function(e) {
                 var self = e.data.self;
-               if (self.windowVariables.width <= self.options.mobileBreakPoint) { // mobile breakpoint
-
-               } else {
+               if (self.windowVariables.width > self.options.mobileBreakPoint) { // mobile breakpoint
                    self.mouseMove(e.pageX - self.zoomVariables.containerOffset.left, e.pageY - self.zoomVariables.containerOffset.top);
                }
            },
@@ -299,6 +295,7 @@
                self.windowVariables.timeout = setTimeout(function() {
                    self.windowVariables.width = self.window.width();
                    self.zoomVariables.containerOffset = self.productZoom.offset();
+                   self.zoomVariables.mainImageWidth = self.productZoom.width();
                }, 50);
            },
            touchEnd: function(e) {
@@ -527,6 +524,7 @@
                            .height(self.zoomVariables.cursorBoxWidth + "px");
                        self.zoomVariables.maxBottom = imgDimensions.height - self.zoomVariables.cursorBoxWidth;
                        self.zoomVariables.maxRight = imgDimensions.width - self.zoomVariables.cursorBoxWidth;
+                       self.zoomVariables.mainImageWidth = self.productZoom.width();
                    }
                }
                img.src = src;
@@ -601,13 +599,16 @@
            }
 
 
-
+           if(x > self.zoomVariables.mainImageWidth){
+             self.events.mouseLeave({ // fake jquery event
+               data:{
+                 self:self
+               }
+             });
+           }
+           else{
            self.animate(left, top);
-
-
-
-
-
+          }
        };
 
 
