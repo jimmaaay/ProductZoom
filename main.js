@@ -175,7 +175,10 @@
 
                    if ($img.size() !== 1) throw "Found " + $img.size() + " images(s) in poplet item";
                    $img.attr("data-index", i);
-                   if (i === 0) $img.addClass("product-zoom-poplet-item--active") return;
+                   if (i === 0){
+                     $img.addClass("product-zoom-poplet-item--active");
+                      return;
+                    }
 
                    ret = self.options.getPopletImage($img.attr("src"), i, $img.attr("data-info"));
 
@@ -640,7 +643,7 @@
 
        ProductZoom.prototype.public = {
            destroy: function(e) {
-               var self = this;.bbbProductZoom;
+               var self = this.bbbProductZoom;
                self.removeListeners();
                self.target.appendTo(self.productZoom.parent()); // might need to check if productZoomParnet is still correct one??
                self.productZoom.remove();

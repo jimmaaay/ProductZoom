@@ -94,6 +94,20 @@ If a jQuery object is returned this will be inserted instead of the image into i
 * Plugin assumes that the first poplet item is the active image.  ( Cannot have replacement element for first item)
 
 
+## Methods
+
+Methods are called on a product zoom instance, through the product
+
+| Method  |  Description |
+| ------- | ------------ |
+| destroy | Removes the productZoom instance |
+
+```javascript
+
+$("#zoom").productZoom("destroy"); 
+
+```
+
 ## Examples
 
 
